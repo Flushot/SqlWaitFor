@@ -1,0 +1,4 @@
+*.suo 
+SqlWaitFor/bin/ 
+SqlWaitFor/obj/ 
+SqlWaitFor/*.user 

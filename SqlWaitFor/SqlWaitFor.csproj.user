@@ -1,0 +1,5 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <StartArguments>-S testingdb1\tadevsql05 -E -L pinsonault\chris.lyon -v</StartArguments>
+  </PropertyGroup>
+</Project>
