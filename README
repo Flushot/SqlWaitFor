@@ -3,27 +3,33 @@ SqlWaitFor
 usage: sqlwaitfor [-options]
 summary:
    monitors the a set of processes (or all processes belonging to a specific
-   user on a sql server instance. when the processes finish, the program
-   will exit. this may be useful in batch scripts.
+   user on a sql server instance.) when the matching processes finish, the
+   program will exit. this may be useful in batch scripts.
 
-required:
-  -S instance           sql server instance to connect to
-  -s spid1,spid2,spidN  spid or spids to monitor
-  -L login              login name to monitor
+options:
+  query (one required):
+    -s spid1,spid2,spidN  spid or comma-separated spids to monitor
+    -L login              login name to monitor (instead of spids)
 
-authentication (pick one method):
-  -E                    use windows authentication (default)
-  -u username           username for sql authentication
-  -p password           password for sql authentication
+  connection (required):
+    -S instance           sql server instance to connect to
+    -E                    use windows authentication (default)
+    -u username           username for sql authentication
+    -p password           password for sql authentication
 
-optional:
-  -v              verbose output (includes detailed process/query info)
-  -q              quiet mode (no output displayed unless its an error)
-  -P port         server port to connect to
-  -t seconds      seconds to wait in between checks (default: 5)
-  -h              help (this screen)
+  optional:
+    -v              verbose output (includes detailed process/query info)
+    -q              quiet mode (all output except for stderr is suppressed)
+    -P port         server port to connect to
+    -t seconds      seconds to wait in between checks (default: 5)
+    -h              help (this screen)
+
+return codes:
+  0 success
+  1 error occurred (stderr)
+  2 invalid argument (stderr)
 
 examples:
-  sqlwaitfor -S server\instance -E -s 13
+  sqlwaitfor -S server\instance -s 13
   sqlwaitfor -S server\instance -u user -p pass -s 12,20,567
-  sqlwaitfor -S server -P 1434 -E -v -L domain\username
+  sqlwaitfor -S server -qP 1434 -L domain\username -t 30
