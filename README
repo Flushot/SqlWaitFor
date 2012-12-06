@@ -30,6 +30,6 @@ return codes:
   2 invalid argument (stderr)
 
 examples:
-  sqlwaitfor -S server\instance -s 13
-  sqlwaitfor -S server\instance -u user -p pass -s 12,20,567
+  sqlwaitfor -S server\instance -s 13 && echo Finished!
+  sqlwaitfor -S server\instance -u user -p pass -s 12,20,567 && run_some_batch_script
   sqlwaitfor -S server -qP 1434 -L domain\username -t 30
