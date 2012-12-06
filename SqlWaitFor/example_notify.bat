@@ -4,10 +4,10 @@
 ::
 setlocal
 
-set wait_for_server=testingdb1\tadevsql05
-set wait_for_user=TestDev
-set notify_email=chris.lyon@pinsonault.com
-set notify_smtp=pinsonexch
+set wait_for_server=server\instance
+set wait_for_user=some_username
+set notify_email=user@host.com
+set notify_smtp=mail_server
 
 :: Wait for processes
 sqlwaitfor -S %wait_for_server% -E -L %wait_for_user% -v
@@ -17,12 +17,12 @@ echo Notifying DBA...
 call :create_tmp_file
 set tmp1=%ret%
 >  %tmp1% echo EHLO me
->> %tmp1% echo MAIL FROM: dba-notification@pinsonault.com
+>> %tmp1% echo MAIL FROM: dba-notification@host.com
 >> %tmp1% echo RCPT TO: %notify_email%
 >> %tmp1% echo DATA
 call :create_tmp_file
 set tmp2=%ret%
->> %tmp2% echo From: "DBA Notification" ^<dba-notification@pinsonault.com^>
+>> %tmp2% echo From: "DBA Notification" ^<dba-notification@host.com^>
 >> %tmp2% echo To: ^<%notify_email%^>
 >> %tmp2% echo Subject: Processes complete for %wait_for_user%
 >> %tmp2% echo.
